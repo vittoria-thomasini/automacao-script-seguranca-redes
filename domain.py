@@ -12,7 +12,7 @@ list_subfinder = []
 
 # input_domain = input('Dominio:')
 
-def exec_tools(input_domain):
+def exec_tools(input_domain, f_name):
 
     print(f">> Enumerando o sub {input_domain}")
     print(f">> Assetfinder")
@@ -35,7 +35,7 @@ def exec_tools(input_domain):
     subfinder_result.close()
 
 
-    salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output)
+    salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, f_name)
 
 def resolv_ip(sub):
     try:
@@ -46,9 +46,9 @@ def resolv_ip(sub):
     except:
         pass
 
-def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output):
+def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, f_name):
 
-    with open('relatorio_final.txt', "a") as arquivo:
+    with open(f_name, "a") as arquivo:
         arquivo.write(f" Relatorio dominio {input_domain}")
         arquivo.write(f" Relatorio ASSETFINDER {input_domain}")
         arquivo.write(assetfinder_output) 

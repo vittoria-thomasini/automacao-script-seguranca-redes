@@ -1,5 +1,9 @@
 from tkinter import *
 from domain import *
+from ip_enumeration import *
+
+domain_result_file_name = 'relatorio_final.txt'
+ips_result_file_name = 'relatorio_final_ips.txt'
 
 class Application:
     def __init__(self, master=None):
@@ -42,7 +46,8 @@ class Application:
 
     def verificaDominio(self):
         inputDominio = self.dominio.get()
-        exec_tools(inputDominio)
+        # exec_tools(inputDominio, domain_result_file_name)
+        enumerate_ips(domain_result_file_name, ips_result_file_name)
 
     def carregando(self, event):
         self.mensagem["text"] = "Carregando..."
