@@ -46,7 +46,7 @@ class Application:
 
     def verificaDominio(self):
         inputDominio = self.dominio.get()
-        # exec_tools(inputDominio, domain_result_file_name)
+        exec_tools(inputDominio, domain_result_file_name)
         enumerate_ips(domain_result_file_name, ips_result_file_name)
 
     def carregando(self, event):
