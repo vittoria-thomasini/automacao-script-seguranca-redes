@@ -4,11 +4,13 @@ import socket
 import os
 import sublist3r 
 import subprocess
+
 dic_subs = {}
 list_ip = []
 list_assetfinder = []
 list_sublister = []
 list_subfinder = []
+list_nmap = []
 
 # input_domain = input('Dominio:')
 
@@ -16,6 +18,12 @@ def exec_tools(input_domain, f_name):
 
     print(f">> Enumerando o sub {input_domain}")
     print(f">> Assetfinder")
+
+
+    print(f">> Nmap Portas e Serviços o sub {input_domain}")
+    nmap_result = os.popen("nmap -sV "+input_domain+" -oN  PortasServicos.txt")
+    nmap_output = nmap_result.read()
+    nmap_result.close()
 
     assetfinder_result = os.popen(f"assetfinder -subs-only {input_domain} >>assetfinder.txt")
     assetfinder_output = assetfinder_result.read()
@@ -34,8 +42,7 @@ def exec_tools(input_domain, f_name):
     subfinder_output = subfinder_result.read()
     subfinder_result.close()
 
-
-    salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, f_name)
+    salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, nmap_output, f_name)
 
 def resolv_ip(sub):
     try:
@@ -46,7 +53,7 @@ def resolv_ip(sub):
     except:
         pass
 
-def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, f_name):
+def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, nmap_output, f_name):
 
     with open(f_name, "a") as arquivo:
         arquivo.write(f" Relatorio dominio {input_domain}")
@@ -54,8 +61,11 @@ def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_outp
         arquivo.write(assetfinder_output) 
         arquivo.write(f" Relatorio SUBFINDER{input_domain}")
         arquivo.write(subfinder_output) 
+        arquivo.write(f" Relatorio NMAP {input_domain}")
+        arquivo.write(nmap_output)        
         arquivo.write(f" Relatorio SUBLISTER {input_domain}")
         arquivo.write(sublister_output) 
+
         # for sublister_output in list_sublister:
         #     list_assetfinder.write("%s\n" % sublister_output )
 #     # Importing difflib
