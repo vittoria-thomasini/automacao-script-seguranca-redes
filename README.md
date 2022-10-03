@@ -5,7 +5,7 @@
 - Assetfinder
 - Sublist3r
 - Subfinder
-
+- NMAP
 
 ## Instalação do projeto
 
