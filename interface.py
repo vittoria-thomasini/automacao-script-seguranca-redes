@@ -3,8 +3,8 @@ from domain import *
 from ip_enumeration import *
 from shodan_oficial import *
 
-domain_result_file_name = 'relatorio_final.txt'
-ips_result_file_name = 'ips.txt'
+domain_result_file_name = 'output/relatorio_final.txt'
+ips_result_file_name = 'output/ips.txt'
 
 class Application:
     def __init__(self, master=None):
@@ -50,6 +50,7 @@ class Application:
         exec_tools(inputDominio, domain_result_file_name)
         ips = enumerate_ips(domain_result_file_name, ips_result_file_name)
         shodanSearch(ips)
+        verificaFinal()
         
 
     def carregando(self, event):
