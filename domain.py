@@ -21,7 +21,7 @@ def exec_tools(input_domain, f_name):
 
 
     print(f">> Nmap Portas e Serviços o sub {input_domain}")
-    nmap_result = os.popen("nmap -sV "+input_domain+" -oN  PortasServicos.txt")
+    nmap_result = os.popen("nmap -sV "+input_domain+" -oJ  PortasServicos.json")
     nmap_output = nmap_result.read()
     nmap_result.close()
 
@@ -29,9 +29,6 @@ def exec_tools(input_domain, f_name):
     assetfinder_output = assetfinder_result.read()
     assetfinder_result.close()
 
-    # print(f">> Sublist3r")
-    # sublister_result = sublist3r.main(input_domain, 40, savefile= None, ports= None, silent=False, verbose= False, enable_bruteforce= False, engines=None)
-    # list_sublister.append(sublister_result)
     print(f">> Sublist3r o sub {input_domain}")
     sublister_result = os.popen("sublist3r -d "+input_domain+" -o sublister.txt")
     sublister_output = sublister_result.read()
@@ -65,29 +62,3 @@ def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_outp
         arquivo.write(nmap_output)        
         arquivo.write(f" Relatorio SUBLISTER {input_domain}")
         arquivo.write(sublister_output) 
-
-        # for sublister_output in list_sublister:
-        #     list_assetfinder.write("%s\n" % sublister_output )
-#     # Importing difflib
-# duas formas de gerar o arquivo sem duplicacao
-#ou gerar 3 arquivos e comparar as saidas e criar um arquivo novo sem duplicacao ou fazer a validacao
-# utilizando as variaveis
-# import difflib
-  
-# with open('file1.txt') as file_1:
-#     file_1_text = file_1.readlines()
-  
-# with open('file2.txt') as file_2:
-#     file_2_text = file_2.readlines()
-  
-# # Find and print the diff:
-# for line in difflib.unified_diff(
-#         file_1_text, file_2_text, fromfile='file1.txt', 
-#         tofile='file2.txt', lineterm=''):
-#     print(line)
-
-# def main():
-#     exec_tools()
-
-# if __name__ == "__main__":
-#     main()

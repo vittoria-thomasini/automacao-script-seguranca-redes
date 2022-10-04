@@ -26,5 +26,4 @@ def enumerate_ips(input_file_name, output_file_name):
     with open(output_file_name, "a") as output_file:
         for ip in ip_set:
             output_file.write(f'{ip}\n')
-
-    print("Resultado da enumeracao de ips", ip_set)
+    return ip_set
