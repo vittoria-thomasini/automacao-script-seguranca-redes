@@ -1,30 +1,12 @@
-import string
-import sys
 import socket
 import os
-import sublist3r 
-import subprocess
 
 dic_subs = {}
 list_ip = []
-list_assetfinder = []
-list_sublister = []
-list_subfinder = []
-list_nmap = []
-
-# input_domain = input('Dominio:')
-
 def exec_tools(input_domain, f_name):
 
     print(f">> Enumerando o sub {input_domain}")
     print(f">> Assetfinder")
-
-
-    print(f">> Nmap Portas e Serviços o sub {input_domain}")
-    nmap_result = os.popen("nmap -sV "+input_domain+" -oJ  PortasServicos.json")
-    nmap_output = nmap_result.read()
-    nmap_result.close()
-
     assetfinder_result = os.popen(f"assetfinder -subs-only {input_domain} >>assetfinder.txt")
     assetfinder_output = assetfinder_result.read()
     assetfinder_result.close()
@@ -38,6 +20,11 @@ def exec_tools(input_domain, f_name):
     subfinder_result = os.popen("subfinder -d "+input_domain+" -silent -o subfinder.txt")
     subfinder_output = subfinder_result.read()
     subfinder_result.close()
+
+    print(f">> Nmap Portas e Serviços o sub {input_domain}")
+    nmap_result = os.popen("nmap -sV -O "+input_domain+" -oN  nmap.txt")
+    nmap_output = nmap_result.read()
+    nmap_result.close()
 
     salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_output, nmap_output, f_name)
 
@@ -62,3 +49,13 @@ def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_outp
         arquivo.write(nmap_output)        
         arquivo.write(f" Relatorio SUBLISTER {input_domain}")
         arquivo.write(sublister_output) 
+
+
+def verificaFinal():
+        with open("finalfinal.txt", "a") as arquivo:
+            for temp in ["relatorio_final.txt","ips.txt", "nmap.txt"]:
+                with open(temp, "r") as output:
+                    arquivo.writelines(output)   
+      
+      
+      

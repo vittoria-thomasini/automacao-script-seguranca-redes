@@ -4,7 +4,7 @@ from ip_enumeration import *
 from shodan_oficial import *
 
 domain_result_file_name = 'relatorio_final.txt'
-ips_result_file_name = 'relatorio_final_ips.txt'
+ips_result_file_name = 'ips.txt'
 
 class Application:
     def __init__(self, master=None):
@@ -54,8 +54,7 @@ class Application:
 
     def carregando(self, event):
         self.mensagem["text"] = "Carregando..."
-
-        
+       
 root = Tk()
 Application(root)
 root.mainloop()
