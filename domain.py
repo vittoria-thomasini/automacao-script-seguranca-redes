@@ -54,8 +54,20 @@ def salve_txt(input_domain, assetfinder_output, subfinder_output, sublister_outp
 def verificaFinal():
     print("iniciando gravação do arquivo final")
     with open("output/finalfinal.txt", "a") as arquivo:
-        for temp in ["relatorio_final.txt", "ips.txt", "shodan.txt"]:
-            with open("output/" + temp, "r") as output:
-                arquivo.writelines(output)   
+
+        arquivo.writelines(["ENUMERACAO SUBDOMINIOS", "\n"])
+        with open("output/relatorio_final.txt", "r") as output:
+            arquivo.writelines(output)   
+        arquivo.writelines(["\n\n\n\n\n", "------------------------", "\n"])
+
+        arquivo.writelines(["ENUMERACAO DE IPS", "\n"])
+        with open("output/ips.txt", "r") as output:
+            arquivo.writelines(output)   
+        arquivo.writelines(["\n\n\n\n\n", "------------------------", "\n"])
+
+        arquivo.writelines(["CONSULTA SHODAN", "\n"])
+        with open("output/shodan.txt", "r") as output:
+            arquivo.writelines(output)   
+        arquivo.writelines(["\n\n\n\n\n", "------------------------", "\n"])
       
     print("finalizando gravação do arquivo final")
